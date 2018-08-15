@@ -7,7 +7,7 @@ namespace HashCheck
     /// </summary>
     public class CurrentConfig
     {
-        private const string RegistryKeyRoot = "SOFTWARE\\Neovici\\HashCheck";
+        private const string RegistryKeyRoot = "SOFTWARE\\jokedst\\HashCheck";
 
         private const bool DefaultMD5 = true;
         private const bool DefaultSHA1 = true;
@@ -15,21 +15,19 @@ namespace HashCheck
         private const bool DefaultSHA384 = true;
         private const bool DefaultSHA512 = true;
 
-
         private static bool GetBoolKey(string keyName, bool defaultValue)
         {
-            var key = Registry.LocalMachine.OpenSubKey(RegistryKeyRoot);
+            var key = Registry.CurrentUser.OpenSubKey(RegistryKeyRoot);
             if (key == null) return defaultValue;
             var val = key.GetValue(keyName, defaultValue);
-            if (val is bool)
-                return (bool)val;
-            return bool.Parse((string)val);
+            if (val is bool b)
+                return b;
+            return bool.Parse((string) val);
         }
 
         private static void SetBoolKey(string keyName, bool value)
         {
-            var key = Registry.LocalMachine.CreateSubKey(RegistryKeyRoot);
-            if (key != null) key.SetValue(keyName, value);
+            Registry.CurrentUser.CreateSubKey(RegistryKeyRoot)?.SetValue(keyName, value);
         }
 
         /// <summary>
@@ -37,8 +35,8 @@ namespace HashCheck
         /// </summary>
         public static bool UseMD5
         {
-            get { return GetBoolKey("UseMD5",DefaultMD5); }
-            set { SetBoolKey("UseMD5",value); }
+            get => GetBoolKey("UseMD5", DefaultMD5);
+            set => SetBoolKey("UseMD5", value);
         }
 
         /// <summary>
@@ -46,8 +44,8 @@ namespace HashCheck
         /// </summary>
         public static bool UseSHA1
         {
-            get { return GetBoolKey("UseSHA1", DefaultSHA1); }
-            set { SetBoolKey("UseSHA1", value); }
+            get => GetBoolKey("UseSHA1", DefaultSHA1);
+            set => SetBoolKey("UseSHA1", value);
         }
 
         /// <summary>
@@ -55,8 +53,8 @@ namespace HashCheck
         /// </summary>
         public static bool UseSHA256
         {
-            get { return GetBoolKey("UseSHA256", DefaultSHA256); }
-            set { SetBoolKey("UseSHA256", value); }
+            get => GetBoolKey("UseSHA256", DefaultSHA256);
+            set => SetBoolKey("UseSHA256", value);
         }
 
         /// <summary>
@@ -64,8 +62,8 @@ namespace HashCheck
         /// </summary>
         public static bool UseSHA384
         {
-            get { return GetBoolKey("UseSHA384", DefaultSHA384); }
-            set { SetBoolKey("UseSHA384", value); }
+            get => GetBoolKey("UseSHA384", DefaultSHA384);
+            set => SetBoolKey("UseSHA384", value);
         }
 
         /// <summary>
@@ -73,12 +71,8 @@ namespace HashCheck
         /// </summary>
         public static bool UseSHA512
         {
-            get { return GetBoolKey("UseSHA512", DefaultSHA512); }
-            set { SetBoolKey("UseSHA512", value); }
+            get => GetBoolKey("UseSHA512", DefaultSHA512);
+            set => SetBoolKey("UseSHA512", value);
         }
-
-
-
-
     }
 }

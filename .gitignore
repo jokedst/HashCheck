@@ -3,3 +3,5 @@
 /_ReSharper.HashCheck
 /HashCheck/obj
 /HashCheck/bin
+.vs
+*.user

@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("HashCheck")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("jokedst")]
 [assembly: AssemblyProduct("HashCheck")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
 [assembly: AssemblyTrademark("")]
